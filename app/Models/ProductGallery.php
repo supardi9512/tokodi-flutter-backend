@@ -5,8 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
 
-class Product extends Model
+class ProductGallery extends Model
 {
     use HasFactory, SoftDeletes;
 
@@ -16,18 +17,17 @@ class Product extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'product_category_id',
-        'name',
-        'description',
-        'price',
-        'tags',
+        'product_id',
+        'url',
     ];
 
-    public function galleries() {
-        return $this->hasMany(ProductGallery::class);
-    }
-
-    public function category() {
-        return $this->belongsTo(ProductCategory::class);
+    /**
+     * Get the product gallery's url.
+     */
+    protected function url(): Attribute
+    {
+        return Attribute::make(
+            get: fn (string $value) => config('app.url') . Storage::url($value),
+        );
     }
 }
