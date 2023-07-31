@@ -56,6 +56,10 @@ class ProductController extends Controller
             $product->where('price', '>=', $price_from);
         }
 
+        if($price_to) {
+            $product->where('price', '<=', $price_to);
+        }
+
         if($category) {
             $product->where('category', $category);
         }
