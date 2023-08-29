@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductCategoryController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
 
         Route::middleware(['admin'])->group(function() {
             Route::resource('category', ProductCategoryController::class);
+            Route::resource('product', ProductController::class);
         });
     });
 });
