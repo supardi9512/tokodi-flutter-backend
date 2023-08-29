@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProductGalleryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,9 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
         Route::middleware(['admin'])->group(function() {
             Route::resource('category', ProductCategoryController::class);
             Route::resource('product', ProductController::class);
+            Route::resource('product.gallery', ProductGalleryController::class)->shallow()->only([
+                'index', 'create', 'store', 'destroy'
+            ]);
         });
     });
 });
