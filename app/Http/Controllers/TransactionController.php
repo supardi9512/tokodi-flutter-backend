@@ -110,7 +110,7 @@ class TransactionController extends Controller
 
         $transaction->update($data);
 
-        return redirect()->route('dashboard.transaction.index');
+        return redirect()->route('dashboard.transaction.index')->with('success', 'Transaction has been updated.');
     }
 
     /**
